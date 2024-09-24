@@ -4,6 +4,13 @@ import { QueryExceptionFilter } from './query-exception/query-exception.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.enableCors({
+    origin: true,
+    credentials: true,
+    exposedHeaders: ['set-cookie'],
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    preflightContinue: true,
+  });
   app.useGlobalFilters(new QueryExceptionFilter());
   await app.listen(8000);
 }
