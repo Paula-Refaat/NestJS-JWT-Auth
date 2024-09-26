@@ -14,9 +14,9 @@ export class AppService {
     return await this.userRepository.save(data);
   }
 
-  async findOne(email: string): Promise<User> {
+  async findOne(condition:any): Promise<User> {
     const user = await this.userRepository.findOne({
-      where: { email },
+      where: condition,
       select: ['id', 'password', 'name', 'email'],
     });
     return user;
